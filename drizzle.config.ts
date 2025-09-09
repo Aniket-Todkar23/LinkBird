@@ -1,13 +1,16 @@
-import 'dotenv/config';
-import type { Config } from 'drizzle-kit'
+import type { Config } from 'drizzle-kit';
 
 const config: Config = {
-  schema: './lib/schema.ts',    // Path to your Drizzle schema
-  out: './drizzle',             // Migrations folder
+  schema: './lib/schema.ts',           // path to your Drizzle schema
+  out: './drizzle',     // folder for generated migrations
   dialect: 'postgresql',
   dbCredentials: {
-    url: "postgresql://postgres:aniket%4023@localhost:5432/linkbird", // Must be set in .env.local
+    host: 'ep-billowing-bush-a1r8iykd-pooler.ap-southeast-1.aws.neon.tech',
+    database: 'neondb',
+    user: 'neondb_owner',
+    password: 'npg_C8FnPtqToh9f',
+    ssl: 'require',
   },
-}
+};
 
-export default config
+export default config;
