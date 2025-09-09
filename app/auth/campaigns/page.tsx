@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { StatusBadge } from '@/components/StatusBadge';
+import { StatusBadge, StatusType } from '@/components/StatusBadge';
 import {
   Plus,
   Search,
@@ -28,7 +28,19 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-const campaigns = [
+type Campaign = {
+  id: number;
+  name: string;
+  status: StatusType;
+  totalLeads: number;
+  requestAccepted: number;
+  requestPending: number;
+  requestRejected: number;
+  connectionConnected: number;
+  connectionPending: number;
+};
+
+const campaigns: Campaign[] = [
   {
     id: 1,
     name: 'Four Seasons Ayurveda',
@@ -66,7 +78,7 @@ const campaigns = [
 
 export default function CampaignsPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filter, setFilter] = useState('All Campaigns');
+  const [filter, setFilter] = useState<'All Campaigns' | 'Active' | 'Inactive'>('All Campaigns');
 
   const filteredCampaigns = campaigns.filter(
     (campaign) =>
@@ -98,7 +110,7 @@ export default function CampaignsPage() {
             {['All Campaigns', 'Active', 'Inactive'].map((f) => (
               <button
                 key={f}
-                onClick={() => setFilter(f)}
+                onClick={() => setFilter(f as 'All Campaigns' | 'Active' | 'Inactive')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   filter === f
                     ? 'bg-blue-50 text-blue-700 border-b-2 border-blue-700'

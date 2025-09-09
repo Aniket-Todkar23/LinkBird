@@ -21,6 +21,10 @@ import {
 import { toast } from 'sonner'
 import { ThemeToggle } from '@/components/layout/theme-toggle'
 
+interface SidebarProps {
+  onClose?: () => void
+}
+
 const navigation = [
   { name: 'Dashboard', href: '/auth/dashboard', icon: LayoutDashboard },
   { name: 'Leads', href: '/auth/leads', icon: Users },
@@ -28,7 +32,7 @@ const navigation = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
-export function Sidebar() {
+export function Sidebar({ onClose }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
   const { sidebarCollapsed, toggleSidebar } = useUIStore()
@@ -41,6 +45,7 @@ export function Sidebar() {
       await signOut()
       toast.success('Logged out successfully')
       router.push('/auth/login')
+      if (onClose) onClose()
     } catch (error) {
       toast.error('Failed to log out')
     } finally {
@@ -74,11 +79,7 @@ export function Sidebar() {
               sidebarCollapsed && "mx-auto"
             )}
           >
-            {sidebarCollapsed ? (
-              <ChevronRight className="h-4 w-4" />
-            ) : (
-              <ChevronLeft className="h-4 w-4" />
-            )}
+            {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
           </Button>
         </div>
       </div>

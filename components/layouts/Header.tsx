@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Bell, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
-import { ThemeProvider } from "@/components/providers/theme-provider"
+import Image from 'next/image';
 
 interface HeaderProps {
   children?: React.ReactNode;
@@ -14,22 +14,18 @@ export function Header({ children }: HeaderProps) {
   const { user } = useAuth();
   const pathname = usePathname();
 
-  // Convert pathname into breadcrumb array
-  const breadcrumbs = pathname
-    .split('/')
-    .filter(Boolean); // removes empty parts
+  const breadcrumbs = pathname.split('/').filter(Boolean);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-    <header className="bg-white border-b border-gray-200 px-6 py-4">
+    <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
       <div className="flex items-center justify-between">
-        {/* Left side: Breadcrumbs */}
-        <div className="flex items-center space-x-2 text-sm font-medium text-gray-600">
+        {/* Breadcrumbs */}
+        <div className="flex items-center space-x-2 text-sm font-medium text-gray-600 dark:text-gray-300">
           {breadcrumbs.map((crumb, idx) => (
             <div key={idx} className="flex items-center">
               <span className="capitalize">{crumb}</span>
               {idx < breadcrumbs.length - 1 && (
-                <ChevronRight className="h-4 w-4 mx-1 text-gray-400" />
+                <ChevronRight className="h-4 w-4 mx-1 text-gray-400 dark:text-gray-500" />
               )}
             </div>
           ))}
@@ -44,15 +40,17 @@ export function Header({ children }: HeaderProps) {
           {user && (
             <div className="flex items-center space-x-2">
               {user.picture ? (
-                <img
-                  className="h-8 w-8 rounded-full"
+                <Image
                   src={user.picture}
-                  alt={user.name}
+                  alt={user.name || 'User'}
+                  width={32}
+                  height={32}
+                  className="rounded-full"
                 />
               ) : (
-                <div className="h-8 w-8 rounded-full bg-gray-300" />
+                <div className="h-8 w-8 rounded-full bg-gray-300 dark:bg-gray-700" />
               )}
-              <span className="hidden md:block text-sm font-medium text-gray-700">
+              <span className="hidden md:block text-sm font-medium text-gray-700 dark:text-gray-300">
                 {user.name}
               </span>
             </div>
@@ -60,6 +58,5 @@ export function Header({ children }: HeaderProps) {
         </div>
       </div>
     </header>
-    </ThemeProvider>
   );
 }

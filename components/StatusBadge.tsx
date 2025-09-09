@@ -2,12 +2,14 @@
 
 import { cn } from '@/lib/utils';
 
+export type StatusType = 'active' | 'inactive' | 'pending' | 'completed' | 'failed' | 'success' | 'warning';
+
 interface StatusBadgeProps {
-  status: 'active' | 'inactive' | 'pending' | 'completed' | 'failed' | 'success' | 'warning';
+  status: StatusType;
   children: React.ReactNode;
 }
 
-const statusStyles = {
+const statusStyles: Record<StatusType, string> = {
   active: 'bg-green-100 text-green-800 border-green-200',
   inactive: 'bg-gray-100 text-gray-800 border-gray-200',
   pending: 'bg-yellow-100 text-yellow-800 border-yellow-200',
