@@ -23,7 +23,7 @@ interface SidebarProps {
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Dashboard', href: '/auth/dashboard', icon: LayoutDashboard },
   { name: 'Campaigns', href: '/auth/campaigns', icon: Folder },
   { name: 'Leads', href: '/auth/leads', icon: Users },
   { name: 'LinkedIn Accounts', href: '/linkedin-accounts', icon: LinkedinIcon },

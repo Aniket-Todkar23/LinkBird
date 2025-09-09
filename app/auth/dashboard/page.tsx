@@ -6,8 +6,6 @@ import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { useQuery } from '@tanstack/react-query'
-import { formatRelativeTime } from '@/lib/utils'
 import { ChevronDown, Users } from 'lucide-react'
 
 // Mock data - replace with actual API calls
@@ -147,10 +145,12 @@ export default function DashboardPage() {
       <div className="p-6 space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Campaigns */}
-          <Card>
+          <Card className="bg-white dark:bg-gray-800 border dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-              <CardTitle className="text-lg font-semibold">Campaigns</CardTitle>
-              <Button variant="outline" size="sm">
+              <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Campaigns
+              </CardTitle>
+              <Button variant="outline" size="sm" className="text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600">
                 All Campaigns
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
@@ -158,8 +158,8 @@ export default function DashboardPage() {
             <CardContent className="space-y-3">
               {mockCampaigns.map((campaign) => (
                 <div key={campaign.id} className="flex items-center justify-between py-2">
-                  <span className="font-medium">{campaign.name}</span>
-                  <Badge variant="success" className="text-green-700">
+                  <span className="font-medium text-gray-900 dark:text-gray-100">{campaign.name}</span>
+                  <Badge variant="success" className="text-green-700 dark:text-green-400">
                     {campaign.status}
                   </Badge>
                 </div>
@@ -168,22 +168,24 @@ export default function DashboardPage() {
           </Card>
 
           {/* Recent Activity */}
-          <Card>
+          <Card className="bg-white dark:bg-gray-800 border dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-              <CardTitle className="text-lg font-semibold">Recent Activity</CardTitle>
-              <Button variant="outline" size="sm">
+              <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Recent Activity
+              </CardTitle>
+              <Button variant="outline" size="sm" className="text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600">
                 Most Recent
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-3 gap-4 text-sm font-medium text-gray-500 pb-2 border-b">
+              <div className="grid grid-cols-3 gap-4 text-sm font-medium text-gray-500 dark:text-gray-400 pb-2 border-b border-gray-200 dark:border-gray-700">
                 <div>Lead</div>
                 <div>Campaign</div>
                 <div>Status</div>
               </div>
               {mockRecentActivity.slice(0, 8).map((activity) => (
-                <div key={activity.id} className="grid grid-cols-3 gap-4 items-center py-2">
+                <div key={activity.id} className="grid grid-cols-3 gap-4 items-center py-2 text-gray-900 dark:text-gray-100">
                   <div className="flex items-center space-x-3">
                     <Avatar className="h-8 w-8">
                       <AvatarImage src={activity.avatar} />
@@ -192,17 +194,11 @@ export default function DashboardPage() {
                       </AvatarFallback>
                     </Avatar>
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">
-                        {activity.name}
-                      </p>
-                      <p className="text-xs text-gray-500 truncate">
-                        {activity.role}
-                      </p>
+                      <p className="text-sm font-medium truncate">{activity.name}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{activity.role}</p>
                     </div>
                   </div>
-                  <div className="text-sm text-gray-900">
-                    {activity.campaign}
-                  </div>
+                  <div className="text-sm">{activity.campaign}</div>
                   <div>
                     <Badge variant={getStatusVariant(activity.status)} className="text-xs">
                       {activity.status}
@@ -215,10 +211,12 @@ export default function DashboardPage() {
         </div>
 
         {/* LinkedIn Accounts */}
-        <Card>
+        <Card className="bg-white dark:bg-gray-800 border dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">LinkedIn Accounts</CardTitle>
-            <div className="grid grid-cols-4 gap-4 text-sm font-medium text-gray-500 mt-4">
+            <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              LinkedIn Accounts
+            </CardTitle>
+            <div className="grid grid-cols-4 gap-4 text-sm font-medium text-gray-500 dark:text-gray-400 mt-4">
               <div>Account</div>
               <div>Status</div>
               <div>Requests</div>
@@ -227,24 +225,20 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             {mockLinkedinAccounts.map((account) => (
-              <div key={account.id} className="grid grid-cols-4 gap-4 items-center py-3">
+              <div key={account.id} className="grid grid-cols-4 gap-4 items-center py-3 text-gray-900 dark:text-gray-100">
                 <div className="flex items-center space-x-3">
                   <Avatar className="h-10 w-10">
-                    <AvatarFallback className="bg-orange-100 text-orange-700">
+                    <AvatarFallback className="bg-orange-100 dark:bg-orange-700 text-orange-700 dark:text-orange-100">
                       {account.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      {account.name}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {account.email}
-                    </p>
+                    <p className="text-sm font-medium">{account.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{account.email}</p>
                   </div>
                 </div>
                 <div>
-                  <Badge variant="default" className="bg-blue-100 text-blue-800">
+                  <Badge variant="default" className="bg-blue-100 dark:bg-blue-700 text-blue-800 dark:text-blue-100">
                     Connected
                   </Badge>
                 </div>

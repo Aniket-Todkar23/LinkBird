@@ -69,7 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (response.ok) {
         const { user: userData } = await response.json();
         setUser(userData);
-        router.push('/dashboard');
+        router.push('/auth/dashboard');
       } else {
         const error = await response.json();
         throw new Error(error.message);
@@ -94,7 +94,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (response.ok) {
         const { user: newUser } = await response.json();
         setUser(newUser);
-        router.push('/dashboard');
+        router.push('/auth/login');
       } else {
         const error = await response.json();
         throw new Error(error.message);

@@ -5,6 +5,7 @@ import { Header } from './header'
 import { ReactNode } from 'react'
 import { SessionProvider } from '@/components/providers/session-provider'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { ThemeProvider } from "@/components/providers/theme-provider"
 
 interface MainLayoutProps {
   children: ReactNode
@@ -20,7 +21,7 @@ export function MainLayout({
   headerActions 
 }: MainLayoutProps) {
   return (
-    // Wrap with AuthProvider first, then SessionProvider
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
     <AuthProvider>
       <SessionProvider>
         <div className="flex h-screen bg-gray-50">
@@ -36,5 +37,6 @@ export function MainLayout({
         </div>
       </SessionProvider>
     </AuthProvider>
+    </ThemeProvider>
   )
 }

@@ -5,7 +5,7 @@ import { QueryProvider } from '@/components/providers/query-provider'
 import { SessionProvider } from '@/components/providers/session-provider'
 import { AuthProvider } from '@/contexts/AuthContext' // <-- add this
 import { Toaster } from 'sonner'
-
+import { ThemeProvider } from "@/components/providers/theme-provider"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -21,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <AuthProvider> {/* Wrap the entire app */}
           <SessionProvider>
             <QueryProvider>
@@ -29,6 +30,7 @@ export default function RootLayout({
             </QueryProvider>
           </SessionProvider>
         </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

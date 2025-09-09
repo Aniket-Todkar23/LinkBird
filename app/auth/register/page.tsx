@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { validatePassword } from '@/lib/validatePassword'
 import { signUp } from '@/lib/auth-client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -19,6 +20,7 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const { valid, errors } = validatePassword(password)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,7 +37,7 @@ export default function RegisterPage() {
         toast.error(result.error.message || 'Registration failed')
       } else {
         toast.success('Account created successfully!')
-        router.push('/dashboard')
+        router.push('/auth/login')
         router.refresh()
       }
     } catch (error) {
@@ -135,6 +137,11 @@ export default function RegisterPage() {
                     )}
                   </Button>
                 </div>
+                {!valid && password.length > 0 && (
+                    <ul className="text-xs text-red-600 mt-1 space-y-1">
+                      {errors.map((err, i) => <li key={i}>• {err}</li>)}
+                    </ul>
+                  )}
               </div>
 
               <Button

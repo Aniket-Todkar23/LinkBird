@@ -31,7 +31,7 @@ export default function EmailLoginPage() {
         toast.error(result.error.message || 'Login failed')
       } else {
         toast.success('Login successful!')
-        router.push('/dashboard')
+        router.push('/auth/dashboard')
         router.refresh()
       }
     } catch (error) {

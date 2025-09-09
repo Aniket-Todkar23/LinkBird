@@ -6,7 +6,7 @@ import { Sidebar } from '@/components/layout/sidebar';
 import { Header } from '@/components/layouts/Header';
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
-
+import { ThemeProvider } from "@/components/providers/theme-provider"
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
@@ -16,6 +16,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const { user } = useAuth();
 
   return (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+
     <div className="min-h-screen bg-gray-50">
       <div className="flex h-screen">
         {/* Mobile sidebar backdrop */}
@@ -56,5 +58,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         </div>
       </div>
     </div>
+ </ThemeProvider>
+
   );
 }
