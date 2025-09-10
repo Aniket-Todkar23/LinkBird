@@ -74,7 +74,7 @@ export default function LeadsPage() {
           {/* Header */}
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Leads</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-navy-100">Leads</h1>
               <p className="text-gray-600 dark:text-gray-300">Manage and track your sales leads</p>
             </div>
             <Button variant="outline">
