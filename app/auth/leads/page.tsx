@@ -14,10 +14,8 @@ import {
   Search,
   Filter,
   Download,
-  MoreVertical,
   Mail,
   Phone,
-  Building,
   MapPin,
   Calendar,
   User,
@@ -46,11 +44,13 @@ export default function LeadsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLeads, setSelectedLeads] = useState<number[]>([]);
   const [selectedLead, setSelectedLead] = useState<any | null>(null);
+  const [statusFilter, setStatusFilter] = useState<string | null>(null); // Filter by status
 
   const filteredLeads = leads.filter(lead =>
-    lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    lead.company.toLowerCase().includes(searchTerm.toLowerCase())
+    lead.company.toLowerCase().includes(searchTerm.toLowerCase())) &&
+    (statusFilter ? lead.status === statusFilter : true)
   );
 
   const toggleLeadSelection = (leadId: number) => {
@@ -74,7 +74,7 @@ export default function LeadsPage() {
           {/* Header */}
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Leads</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Leads</h1>
               <p className="text-gray-600 dark:text-gray-300">Manage and track your sales leads</p>
             </div>
             <Button variant="outline">
@@ -97,8 +97,15 @@ export default function LeadsPage() {
                     />
                   </div>
                 </div>
-                <Button variant="outline">
-                  <Filter className="h-4 w-4 mr-2" /> Filter
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    setStatusFilter(prev =>
+                      prev === 'active' ? null : 'active'
+                    )
+                  }
+                >
+                  <Filter className="h-4 w-4 mr-2" /> {statusFilter ? 'Clear Filter' : 'Active Leads'}
                 </Button>
               </div>
             </CardContent>
@@ -107,19 +114,19 @@ export default function LeadsPage() {
           {/* Leads Table */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-gray-900 dark:text-gray-100">All Leads ({filteredLeads.length})</CardTitle>
+              <CardTitle className="text-gray-900 dark:text-white">All Leads ({filteredLeads.length})</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-12 text-gray-900 dark:text-gray-100"></TableHead>
-                    <TableHead className="text-gray-900 dark:text-gray-100">Lead</TableHead>
-                    <TableHead className="text-gray-900 dark:text-gray-100">Company</TableHead>
-                    <TableHead className="text-gray-900 dark:text-gray-100">Campaign</TableHead>
-                    <TableHead className="text-gray-900 dark:text-gray-100">Status</TableHead>
-                    <TableHead className="text-gray-900 dark:text-gray-100">Score</TableHead>
-                    <TableHead className="text-gray-900 dark:text-gray-100">Last Contact</TableHead>
+                    <TableHead className="w-12 text-gray-900 dark:text-white"></TableHead>
+                    <TableHead className="text-gray-900 dark:text-white">Lead</TableHead>
+                    <TableHead className="text-gray-900 dark:text-white">Company</TableHead>
+                    <TableHead className="text-gray-900 dark:text-white">Campaign</TableHead>
+                    <TableHead className="text-gray-900 dark:text-white">Status</TableHead>
+                    <TableHead className="text-gray-900 dark:text-white">Score</TableHead>
+                    <TableHead className="text-gray-900 dark:text-white">Last Contact</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
