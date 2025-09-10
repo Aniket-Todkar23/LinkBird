@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowLeft, Loader2, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
+import { ThemeProvider } from "@/components/providers/theme-provider"
 
 export default function RegisterPage() {
   const [firstName, setFirstName] = useState('')
@@ -48,6 +49,7 @@ export default function RegisterPage() {
   }
 
   return (
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
     <div className="min-h-screen bg-gradient-to-br from-linkbird-50 to-linkbird-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
         <Card>
@@ -170,5 +172,6 @@ export default function RegisterPage() {
         </Card>
       </div>
     </div>
+    </ThemeProvider>
   )
 }

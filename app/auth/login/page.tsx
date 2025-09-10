@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardDescription, CardTitle } from '@/components/ui/card'
 import { Mail, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { ThemeProvider } from "@/components/providers/theme-provider"
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -53,6 +54,7 @@ export default function LoginPage() {
   }
 
   return (
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
     <div className="min-h-screen bg-gradient-to-br from-linkbird-50 to-linkbird-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
@@ -132,5 +134,6 @@ export default function LoginPage() {
         </Card>
       </div>
     </div>
+    </ThemeProvider>
   )
 }

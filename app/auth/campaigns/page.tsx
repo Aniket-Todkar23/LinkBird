@@ -5,6 +5,7 @@ import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { StatusBadge, StatusType } from '@/components/StatusBadge';
+import { ThemeProvider } from "@/components/providers/theme-provider"
 import {
   Plus,
   Search,
@@ -88,6 +89,7 @@ export default function CampaignsPage() {
   );
 
   return (
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
     <DashboardLayout>
       <div className="p-6 md:p-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
         {/* Header */}
@@ -245,5 +247,6 @@ export default function CampaignsPage() {
         </div>
       </div>
     </DashboardLayout>
+  </ThemeProvider>
   );
 }

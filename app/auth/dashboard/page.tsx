@@ -7,6 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { ChevronDown, Users } from 'lucide-react'
+import { ThemeProvider } from "@/components/providers/theme-provider"
+
 
 // Mock data - replace with actual API calls
 const mockCampaigns = [
@@ -138,6 +140,7 @@ function getStatusVariant(status: string) {
 
 export default function DashboardPage() {
   return (
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
     <MainLayout 
       title="Dashboard"
       description="Welcome back! Here's what's happening with your campaigns."
@@ -258,5 +261,6 @@ export default function DashboardPage() {
         </Card>
       </div>
     </MainLayout>
+    </ThemeProvider>
   )
 }
